@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Urooj Akhlaq</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy:       #0d1b2a;
+      --navy-mid:   #162236;
+      --navy-soft:  #1e3048;
+      --gold:       #c9a84c;
+      --gold-light: #e0c070;
+      --gold-pale:  #f5edcf;
+      --ivory:      #faf8f3;
+      --white:      #ffffff;
+      --ink:        #0d1b2a;
+      --ink-mid:    #3a4a5c;
+      --ink-soft:   #6b7d8f;
+      --rule:       #ddd5c0;
+      --rule-light: #ede8dc;
+      --ff-serif: 'Cormorant Garamond', Georgia, serif;
+      --ff-sans:  'DM Sans', system-ui, sans-serif;
+      --ff-mono:  'DM Mono', monospace;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--ivory);
+      color: var(--ink);
+      font-family: var(--ff-sans);
+      font-size: 15px;
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(13,27,42,0.97);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(201,168,76,0.25);
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0 5rem; height: 60px;
+    }
+    .nav-name {
+      font-family: var(--ff-serif); font-size: 1.05rem; font-weight: 500;
+      letter-spacing: 0.06em; color: var(--gold); text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      font-family: var(--ff-mono); font-size: 0.65rem; letter-spacing: 0.14em;
+      color: rgba(255,255,255,0.55); text-decoration: none;
+      text-transform: uppercase; transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--gold-light); }
+
+    /* ── LAYOUT ── */
+    .page { max-width: 960px; margin: 0 auto; padding: 0 3rem; }
+
+    /* ── HERO ── */
+    .hero {
+      padding-top: 140px; padding-bottom: 80px;
+      border-bottom: 1px solid var(--rule);
+      display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: end;
+    }
+    .hero-eyebrow {
+      font-family: var(--ff-mono); font-size: 0.65rem; letter-spacing: 0.2em;
+      color: var(--gold); text-transform: uppercase; margin-bottom: 1.5rem;
+      display: flex; align-items: center; gap: 0.75rem;
+    }
+    .hero-eyebrow::before {
+      content: ''; display: block; width: 28px; height: 1px; background: var(--gold);
+    }
+    .hero-name {
+      font-family: var(--ff-serif); font-size: clamp(3rem, 5vw, 4.5rem);
+      font-weight: 500; line-height: 1.08; letter-spacing: -0.01em; margin-bottom: 1.5rem;
+      color: var(--navy);
+    }
+    .hero-name em { font-style: italic; color: var(--gold); }
+    .hero-desc {
+      font-size: 1rem; color: var(--ink-mid); line-height: 1.85;
+      font-weight: 300; max-width: 380px;
+    }
+    .hero-stat-row {
+      border-top: 1px solid var(--rule); padding: 1.1rem 0;
+      display: flex; justify-content: space-between; align-items: baseline;
+    }
+    .hero-stat-row:last-child { border-bottom: 1px solid var(--rule); }
+    .hero-stat-label {
+      font-family: var(--ff-mono); font-size: 0.63rem; letter-spacing: 0.15em;
+      color: var(--gold); text-transform: uppercase;
+    }
+    .hero-stat-value { font-size: 0.88rem; font-weight: 400; color: var(--ink); }
+    .hero-stat-value a {
+      color: inherit; text-decoration: none;
+      border-bottom: 1px solid var(--rule); transition: border-color 0.2s, color 0.2s;
+    }
+    .hero-stat-value a:hover { border-color: var(--gold); color: var(--gold); }
+
+    /* ── SECTION ── */
+    .section { padding: 6rem 0; border-bottom: 1px solid var(--rule); }
+    .section:last-of-type { border-bottom: none; }
+    .section-label {
+      font-family: var(--ff-mono); font-size: 0.63rem; letter-spacing: 0.22em;
+      color: var(--gold); text-transform: uppercase; margin-bottom: 3.5rem;
+      display: flex; align-items: center; gap: 1rem;
+    }
+    .section-label span { font-size: 0.58rem; color: var(--rule); }
+
+    /* ── SKILLS ── */
+    .skills-table { width: 100%; border-collapse: collapse; }
+    .skills-table tr { border-top: 1px solid var(--rule); }
+    .skills-table tr:last-child { border-bottom: 1px solid var(--rule); }
+    .skills-table td { padding: 1.1rem 0; vertical-align: top; }
+    .skills-table td:first-child {
+      font-family: var(--ff-mono); font-size: 0.63rem; letter-spacing: 0.15em;
+      color: var(--gold); text-transform: uppercase; width: 160px; padding-top: 1.2rem;
+    }
+    .skill-pills { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .skill-pill {
+      font-family: var(--ff-mono); font-size: 0.68rem; padding: 0.28rem 0.8rem;
+      border: 1px solid var(--rule); color: var(--ink-mid); letter-spacing: 0.04em;
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+      background: var(--white);
+    }
+    .skill-pill:hover { border-color: var(--gold); color: var(--navy); background: var(--gold-pale); }
+
+    /* ── EXPERIENCE ── */
+    .exp-entry {
+      display: grid; grid-template-columns: 200px 1fr; gap: 3rem;
+      padding: 3rem 0; border-top: 1px solid var(--rule);
+    }
+    .exp-entry:last-child { border-bottom: 1px solid var(--rule); }
+    .exp-co { font-size: 0.85rem; font-weight: 500; letter-spacing: 0.02em; margin-bottom: 0.25rem; }
+    .exp-period {
+      font-family: var(--ff-mono); font-size: 0.63rem; color: var(--gold);
+      letter-spacing: 0.1em; margin-bottom: 0.5rem;
+    }
+    .exp-loc { font-size: 0.8rem; color: var(--ink-soft); font-style: italic; }
+    .exp-role {
+      font-family: var(--ff-serif); font-size: 1.55rem; font-weight: 500;
+      line-height: 1.2; margin-bottom: 0.35rem; color: var(--navy);
+    }
+    .exp-team {
+      font-family: var(--ff-mono); font-size: 0.63rem; color: var(--ink-soft);
+      letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 1.5rem;
+    }
+    .exp-group { margin-bottom: 1.25rem; }
+    .exp-group-title {
+      font-family: var(--ff-mono); font-size: 0.61rem; letter-spacing: 0.18em;
+      color: var(--gold); text-transform: uppercase; margin-bottom: 0.6rem;
+      padding-bottom: 0.4rem; border-bottom: 1px solid var(--rule-light);
+    }
+    .exp-ul { list-style: none; }
+    .exp-ul li {
+      position: relative; padding-left: 1rem; margin-bottom: 0.45rem;
+      font-size: 0.9rem; color: var(--ink-mid); line-height: 1.7;
+    }
+    .exp-ul li::before {
+      content: ''; position: absolute; left: 0; top: 0.68em;
+      width: 4px; height: 1px; background: var(--gold);
+    }
+    .num { color: var(--navy); font-weight: 500; }
+
+    /* ── PROJECTS ── */
+    .proj-grid { display: grid; grid-template-columns: repeat(3, 1fr); }
+    .proj-card {
+      padding: 2rem 1.75rem;
+      border: 1px solid var(--rule);
+      margin-right: -1px; margin-bottom: -1px;
+      transition: background 0.25s, border-color 0.25s;
+      background: var(--white);
+    }
+    .proj-card:hover { background: var(--gold-pale); border-color: var(--gold); }
+    .proj-idx {
+      font-family: var(--ff-mono); font-size: 0.58rem; color: var(--rule);
+      letter-spacing: 0.1em; margin-bottom: 1rem;
+    }
+    .proj-name {
+      font-family: var(--ff-serif); font-size: 1.1rem; font-weight: 500;
+      margin-bottom: 0.35rem; line-height: 1.3; color: var(--navy);
+    }
+    .proj-date {
+      font-family: var(--ff-mono); font-size: 0.61rem; color: var(--gold);
+      letter-spacing: 0.1em; margin-bottom: 0.9rem;
+    }
+    .proj-desc { font-size: 0.85rem; color: var(--ink-mid); line-height: 1.7; margin-bottom: 1rem; }
+    .proj-stack { display: flex; flex-wrap: wrap; gap: 0.3rem; }
+    .proj-tag {
+      font-family: var(--ff-mono); font-size: 0.59rem; letter-spacing: 0.06em;
+      padding: 0.18rem 0.5rem; background: var(--ivory);
+      border: 1px solid var(--rule); color: var(--ink-soft);
+    }
+
+    /* ── EDUCATION ── */
+    .edu-entry {
+      display: grid; grid-template-columns: 200px 1fr; gap: 3rem;
+      padding: 2.25rem 0; border-top: 1px solid var(--rule); align-items: baseline;
+    }
+    .edu-entry:last-child { border-bottom: 1px solid var(--rule); }
+    .edu-year {
+      font-family: var(--ff-mono); font-size: 0.63rem; color: var(--gold); letter-spacing: 0.1em;
+    }
+    .edu-inst {
+      font-family: var(--ff-serif); font-size: 1.15rem; font-weight: 500;
+      margin-bottom: 0.2rem; color: var(--navy);
+    }
+    .edu-deg { font-size: 0.85rem; color: var(--ink-mid); margin-bottom: 0.25rem; }
+    .edu-grade {
+      font-family: var(--ff-mono); font-size: 0.65rem; color: var(--ink-soft); letter-spacing: 0.1em;
+    }
+    .edu-badge {
+      display: inline-block; font-family: var(--ff-mono); font-size: 0.59rem;
+      letter-spacing: 0.12em; text-transform: uppercase; padding: 0.22rem 0.65rem;
+      background: var(--navy); color: var(--gold); margin-top: 0.5rem;
+      border: 1px solid var(--gold);
+    }
+
+    /* ── ACHIEVEMENTS ── */
+    .ach-list { list-style: none; }
+    .ach-item {
+      display: grid; grid-template-columns: 200px 1fr; gap: 3rem;
+      padding: 1.3rem 0; border-top: 1px solid var(--rule); align-items: baseline;
+    }
+    .ach-item:last-child { border-bottom: 1px solid var(--rule); }
+    .ach-org {
+      font-family: var(--ff-mono); font-size: 0.61rem; color: var(--gold);
+      letter-spacing: 0.1em; text-transform: uppercase; line-height: 1.6;
+    }
+    .ach-text { font-size: 0.88rem; color: var(--ink-mid); line-height: 1.7; }
+    .ach-text strong { color: var(--navy); font-weight: 500; }
+
+    /* ── FOOTER ── */
+    .footer {
+      background: var(--navy);
+      border-top: 1px solid rgba(201,168,76,0.3);
+      padding: 5rem 0 4rem;
+    }
+    .footer-inner { max-width: 960px; margin: 0 auto; padding: 0 3rem; }
+    .footer-top {
+      display: flex; justify-content: space-between; align-items: flex-end;
+      margin-bottom: 4rem; padding-bottom: 4rem;
+      border-bottom: 1px solid rgba(201,168,76,0.2);
+    }
+    .footer-heading {
+      font-family: var(--ff-serif); font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 500; line-height: 1.1; color: var(--white);
+    }
+    .footer-heading em { font-style: italic; color: var(--gold); }
+    .footer-links { display: flex; flex-direction: column; gap: 0.9rem; align-items: flex-end; }
+    .footer-link {
+      font-family: var(--ff-mono); font-size: 0.7rem; letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.65); text-decoration: none;
+      border-bottom: 1px solid rgba(201,168,76,0.25);
+      padding-bottom: 0.15rem; transition: border-color 0.2s, color 0.2s;
+    }
+    .footer-link:hover { border-color: var(--gold); color: var(--gold-light); }
+    .footer-copy {
+      font-family: var(--ff-mono); font-size: 0.6rem; letter-spacing: 0.12em;
+      color: rgba(255,255,255,0.3); text-transform: uppercase;
+      display: flex; justify-content: space-between;
+    }
+
+    /* ── REVEAL ANIMATION ── */
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .reveal.in { opacity: 1; transform: none; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 720px) {
+      nav { padding: 0 1.5rem; }
+      .nav-links { display: none; }
+      .page { padding: 0 1.5rem; }
+      .hero { grid-template-columns: 1fr; gap: 2.5rem; padding-top: 100px; }
+      .exp-entry, .ach-item, .edu-entry { grid-template-columns: 1fr; gap: 0.5rem; }
+      .proj-grid { grid-template-columns: 1fr; }
+      .footer-top { flex-direction: column; gap: 2rem; align-items: flex-start; }
+      .footer-links { align-items: flex-start; }
+      .footer-inner { padding: 0 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-name">Urooj Akhlaq</a>
+  <ul class="nav-links">
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#achievements">Awards</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="page">
+  <div class="hero">
+    <div class="reveal">
+      <p class="hero-eyebrow">Data Engineering · Strategy</p>
+      <h1 class="hero-name">Urooj<br><em>Akhlaq</em></h1>
+      <p class="hero-desc">Previously Data engineer and now PGP candidate at IIM Bangalore with 3+ years at American Express and Deloitte USI. Specialises in building pipelines that turn complexity into clarity — at scale.</p>
+    </div>
+    <div class="reveal">
+      <div class="hero-stat-row"><span class="hero-stat-label">Currently</span><span class="hero-stat-value">IIM Bangalore, PGP 2025</span></div>
+      <div class="hero-stat-row"><span class="hero-stat-label">Previously</span><span class="hero-stat-value">American Express · Deloitte USI</span></div>
+      <div class="hero-stat-row"><span class="hero-stat-label">Education</span><span class="hero-stat-value">B.Tech EE, IIT Jammu</span></div>
+      <div class="hero-stat-row"><span class="hero-stat-label">Email</span><span class="hero-stat-value"><a href="mailto:uroojakhlaq@gmail.com">uroojakhlaq@gmail.com</a></span></div>
+      <div class="hero-stat-row"><span class="hero-stat-label">Location</span><span class="hero-stat-value">Bengaluru · Open to relocate</span></div>
+      <div class="hero-stat-row"><span class="hero-stat-label">Profiles</span><span class="hero-stat-value"><a href="https://linkedin.com/in/urooj-akhlaq" target="_blank">LinkedIn</a> &ensp;<a href="https://github.com/uroojakhlaq" target="_blank">GitHub</a></span></div>
+    </div>
+  </div>
+</div>
+
+<!-- SKILLS -->
+<div class="page">
+  <section class="section" id="skills">
+    <div class="section-label reveal">Technical Skills <span>——</span> 01</div>
+    <table class="skills-table reveal">
+      <tr><td>Languages</td><td><div class="skill-pills"><span class="skill-pill">Python</span><span class="skill-pill">SQL</span><span class="skill-pill">Java</span><span class="skill-pill">Bash</span><span class="skill-pill">Hive</span></div></td></tr>
+      <tr><td>Platforms</td><td><div class="skill-pills"><span class="skill-pill">Databricks</span><span class="skill-pill">Snowflake</span><span class="skill-pill">Tableau</span><span class="skill-pill">Autosys</span><span class="skill-pill">Kibana</span><span class="skill-pill">Airflow</span></div></td></tr>
+      <tr><td>Frameworks</td><td><div class="skill-pills"><span class="skill-pill">PySpark</span><span class="skill-pill">ETL / ELT</span><span class="skill-pill">Spring Boot</span><span class="skill-pill">pytest</span><span class="skill-pill">Pandas</span></div></td></tr>
+      <tr><td>Databases</td><td><div class="skill-pills"><span class="skill-pill">PostgreSQL</span><span class="skill-pill">MySQL</span><span class="skill-pill">Salesforce</span><span class="skill-pill">AWS S3</span><span class="skill-pill">GCP</span></div></td></tr>
+    </table>
+  </section>
+</div>
+
+<!-- EXPERIENCE -->
+<div class="page">
+  <section class="section" id="experience">
+    <div class="section-label reveal">Experience <span>——</span> 02</div>
+
+    <div class="exp-entry reveal">
+      <div>
+        <p class="exp-co">American Express</p>
+        <p class="exp-period">Aug 2024 — May 2025</p>
+        <p class="exp-loc">Bengaluru, India</p>
+      </div>
+      <div>
+        <h3 class="exp-role">Engineer II</h3>
+        <p class="exp-team">Global Campaign Tracking</p>
+        <div class="exp-group">
+          <p class="exp-group-title">Product Development</p>
+          <ul class="exp-ul">
+            <li>Pioneered a Java API-based email auto-reporting tool, saving <span class="num">60+ hrs/week</span> and reducing manual effort by <span class="num">95%</span>.</li>
+            <li>Revamped affiliate payment logic with PySpark replacing Hive; cut load time by <span class="num">94%</span> (18 hrs → 1 hr).</li>
+            <li>Crafted a paid search report tracking Google Ads conversions; cut effort by <span class="num">80%</span> and improved monthly payout by <span class="num">45%</span>.</li>
+            <li>Integrated pytest across <span class="num">5+ reports</span>, boosting reporting accuracy and efficiency by <span class="num">18%</span>.</li>
+            <li>Redesigned report logic by segmenting business units; cut runtime <span class="num">75%</span> and improved bounty payout by <span class="num">30%</span>.</li>
+          </ul>
+        </div>
+        <div class="exp-group">
+          <p class="exp-group-title">Leadership</p>
+          <ul class="exp-ul">
+            <li>Led Kibana dashboard revamp with <span class="num">20+ KPIs</span>, serving 10+ stakeholders and improving reporting efficiency by <span class="num">50%</span>.</li>
+            <li>Monitored <span class="num">100K+ card submits</span> across Google Ads, coordinating 4+ teams to improve reporting speed by <span class="num">25%</span>.</li>
+            <li>Outlined affiliate report flows aiding <span class="num">5+ PMs</span> shaping marketing spend across <span class="num">160 countries</span>.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-entry reveal">
+      <div>
+        <p class="exp-co">Deloitte USI</p>
+        <p class="exp-period">Jun 2022 — Jul 2024</p>
+        <p class="exp-loc">Bengaluru, India</p>
+      </div>
+      <div>
+        <h3 class="exp-role">Data Engineer / Analyst</h3>
+        <p class="exp-team">Covered California — Health Insurance Portal</p>
+        <div class="exp-group">
+          <p class="exp-group-title">Optimization</p>
+          <ul class="exp-ul">
+            <li>Optimized <span class="num">300+ Databricks and Snowflake</span> jobs, cutting runtime <span class="num">5–8%</span> and reducing monthly spend by <span class="num">$6K–$10K</span>.</li>
+            <li>Corrected <span class="num">1M+ data mismatches</span>, improving data quality for <span class="num">15M+ Medi-Cal enrollees</span>.</li>
+            <li>Built a pipeline-gap dashboard processing <span class="num">1M+ rows/day</span>, improving reliability for <span class="num">1.7M+ users</span>.</li>
+            <li>Streamlined ETL checks via Autosys across 5+ teams, reducing downtime by <span class="num">40%</span>.</li>
+          </ul>
+        </div>
+        <div class="exp-group">
+          <p class="exp-group-title">Product Development</p>
+          <ul class="exp-ul">
+            <li>Revamped the Covered California portal with Salesforce and RPA analytics, impacting <span class="num">$157B</span> in Medi-Cal funds.</li>
+            <li>Delivered a business health dashboard for a project worth over <span class="num">$400M+</span>, syncing 5+ stakeholders.</li>
+            <li>Built dashboards with <span class="num">20+ KPIs</span>, enabling tracking of <span class="num">260K+ new enrollees</span> and <span class="num">1.4M+ renewals</span>.</li>
+            <li>Migrated Databricks PVC to E2; cut HIPAA compliance risk by <span class="num">40%</span> for 30+ users.</li>
+          </ul>
+        </div>
+        <div class="exp-group">
+          <p class="exp-group-title">Leadership</p>
+          <ul class="exp-ul">
+            <li>Created process docs for 5+ workflows, raising team efficiency for <span class="num">20+ users by 40%</span>.</li>
+            <li>Mentored 3 analysts on toolsets and workflows, improving delivery speed by <span class="num">20%</span>.</li>
+            <li>Maintained SLA delivery and stakeholder updates for <span class="num">40+ client contacts</span>.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- EDUCATION -->
+<div class="page">
+  <section class="section" id="education">
+    <div class="section-label reveal">Education <span>——</span> 03</div>
+    <div class="edu-entry reveal">
+      <div class="edu-year">2024 — 2025</div>
+      <div>
+        <p class="edu-inst">Indian Institute of Management Bangalore</p>
+        <p class="edu-deg">Post Graduate Program in Management (PGP)</p>
+        <span class="edu-badge">Merit Scholarship — 1 of 544</span>
+      </div>
+    </div>
+    <div class="edu-entry reveal">
+      <div class="edu-year">2018 — 2022</div>
+      <div>
+        <p class="edu-inst">Indian Institute of Technology, Jammu</p>
+        <p class="edu-deg">B.Tech — Electrical Engineering</p>
+        <!-- <p class="edu-grade">CGPA 7.96 / 10.00</p> -->
+      </div>
+    </div>
+    <div class="edu-entry reveal">
+      <div class="edu-year">2015 &amp; 2017</div>
+      <div>
+        <p class="edu-inst">Carman Residential &amp; Day School, Dehradun</p>
+        <p class="edu-deg">Class X (ICSE) &amp; Class XII (ISC)</p>
+        <p class="edu-grade">93.86% — School Rank 1 &nbsp;·&nbsp; 92.67% — School Rank 2</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- PROJECTS -->
+<div class="page">
+  <section class="section" id="projects">
+    <div class="section-label reveal">Projects <span>——</span> 04</div>
+    <div class="proj-grid reveal">
+      <div class="proj-card">
+        <p class="proj-idx">01</p>
+        <h3 class="proj-name">Weather ETL — Dehradun</h3>
+        <p class="proj-date">January 2024</p>
+        <p class="proj-desc">End-to-end ETL pulling live weather data, transforming JSON to a structured DataFrame, and loading to Amazon S3. Orchestrated hourly using Apache Airflow on Linux.</p>
+        <div class="proj-stack"><span class="proj-tag">Python</span><span class="proj-tag">Airflow</span><span class="proj-tag">AWS S3</span><span class="proj-tag">Pandas</span></div>
+      </div>
+      <div class="proj-card">
+        <p class="proj-idx">02</p>
+        <h3 class="proj-name">E-Commerce EDA — Flipkart</h3>
+        <p class="proj-date">September 2023</p>
+        <p class="proj-desc">Exploratory data analysis on Flipkart's Kaggle dataset — visualising KPIs across furniture, clothing, and electronics with pricing and discount pattern analysis.</p>
+        <div class="proj-stack"><span class="proj-tag">Python</span><span class="proj-tag">Pandas</span><span class="proj-tag">Matplotlib</span><span class="proj-tag">Kaggle</span></div>
+      </div>
+      <div class="proj-card">
+        <p class="proj-idx">03</p>
+        <h3 class="proj-name">Hospital Management System</h3>
+        <p class="proj-date">February 2021</p>
+        <p class="proj-desc">Full-stack Python + MySQL system managing doctor, patient, staff records and bed availability — with a custom UI for multi-screen navigation.</p>
+        <div class="proj-stack"><span class="proj-tag">Python</span><span class="proj-tag">MySQL</span><span class="proj-tag">Tkinter</span></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ACHIEVEMENTS -->
+<div class="page">
+  <section class="section" id="achievements">
+    <div class="section-label reveal">Awards &amp; Achievements <span>——</span> 05</div>
+    <ul class="ach-list">
+      <li class="ach-item reveal"><p class="ach-org">IIM Bangalore · 2025</p><p class="ach-text"><strong>Merit Scholarship Awardee</strong> — 1 of 544 PGP students; selected for exemplary performance. Cash prize ₹5,00,000.</p></li>
+      <!-- <li class="ach-item reveal"><p class="ach-org">IIT Jammu · 2022</p><p class="ach-text"><strong>Winner, Talk-It-Live</strong> — 1st of 20 teams in extempore contest at Renao'22 (6K+ footfall). Cash prize ₹5,000.</p></li>
+      <li class="ach-item reveal"><p class="ach-org">IIT Jammu · 2022</p><p class="ach-text"><strong>Runner-Up, Pens-worth</strong> — Script writing contest, 1 of 25 teams. Cash prize ₹3,000.</p></li> -->
+      <li class="ach-item reveal"><p class="ach-org">IIT Jammu · 2019</p><p class="ach-text"><strong>3rd Place, Technunctus Coding Contest</strong> — Top 3 of 100+ teams at the flagship technical fest.</p></li>
+      <li class="ach-item reveal"><p class="ach-org">CISCE · 2015–17</p><p class="ach-text"><strong>Ranked 11th &amp; 19th All India</strong> across 158K+ and 72K+ candidates in ICSE and ISC board exams.</p></li>
+      <!-- <li class="ach-item reveal"><p class="ach-org">CRDS · 2015–16</p><p class="ach-text"><strong>Silverzone Math Olympiad</strong> — State Rank 25 of ~3,200 global participants. School topper both years.</p></li> -->
+      <li class="ach-item reveal"><p class="ach-org">CRDS · 2015</p><p class="ach-text"><strong>INR 67K Scholarship</strong> — Awarded for Class 10 performance; ranked 1st of 80+ students.</p></li>
+    </ul>
+  </section>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer" id="contact">
+  <div class="footer-inner">
+    <div class="footer-top reveal">
+      <h2 class="footer-heading">Let's<br><em>connect.</em></h2>
+      <div class="footer-links">
+        <a href="mailto:uroojakhlaq@gmail.com" class="footer-link">uroojakhlaq@gmail.com</a>
+        <!-- <a href="tel:+918384881637" class="footer-link">+91 83848 81637</a> -->
+        <a href="https://linkedin.com/in/urooj-akhlaq" target="_blank" class="footer-link">linkedin.com/in/urooj-akhlaq</a>
+        <a href="https://github.com/uroojakhlaq" target="_blank" class="footer-link">github.com/uroojakhlaq</a>
+      </div>
+    </div>
+    <div class="footer-copy">
+      <span>© 2026 Urooj Akhlaq</span>
+      <span>Dehradun, Uttarakhand, India</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
